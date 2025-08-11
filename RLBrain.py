@@ -14,7 +14,7 @@ class RLBrain():
     '''
     Before running the code, please modify this file path as needed
     '''
-    FILEPATH = '/Users/jingci/Desktop/RL/warehouseTest/WarehouseRobotPathPlanning-master/'
+    FILEPATH = '/Users/mirodilbekfazilov/developer/simu/Warehouse_Robot_Path_Planning/'
     def choose_action(self, observation, epsilon):
         self.check_state_exist(observation)
         # action selection
@@ -38,7 +38,7 @@ class RLBrain():
         self.q_table.loc[s, a] += alpha * (q_target - q_predict)  # update
         #print (self.q_table)
 
-    def check_state_exist(self, state):
+    """def check_state_exist(self, state):
         if state not in self.q_table.index:
             # append new state to q table
             self.q_table = self.q_table.append(
@@ -47,4 +47,14 @@ class RLBrain():
                     index=self.q_table.columns,
                     name=state,
                 )
+            )"""
+
+    def check_state_exist(self, state):
+        if state not in self.q_table.index:
+            # append new state to q table using concat
+            new_row = pd.Series(
+                [0] * len(self.actions),
+                index=self.q_table.columns,
+                name=state
             )
+            self.q_table = pd.concat([self.q_table, new_row.to_frame().T])

@@ -37,12 +37,12 @@ CURRENTSTATE = STATE2
 True, if using the data of this trial for future training
 False, if just testing
 '''
-RECORDDATA = False
+RECORDDATA = True
 
 '''
 Before running the code, please modify this file path as needed
 '''
-FILEPATH = "/Users/jingci/Desktop/RL/warehouseTest/WarehouseRobotPathPlanning-master/"
+FILEPATH = "/Users/mirodilbekfazilov/developer/simu/Warehouse_Robot_Path_Planning/"
 
 
 def update():
@@ -289,13 +289,21 @@ def learn (episode, RL, action, reward, observation, observation_):
      else:
          RL.learn(str(observation), action, reward, str(observation_), 0.001, 0.9)
 
-def plot(reward):
+"""def plot(reward):
     plt.style.use('seaborn-deep')
     plt.plot(reward,linewidth= 0.3)
     plt.title('Q Learning Total Reward')
     plt.xlabel('Trial')
     plt.ylabel('Reward')
-    plt.show() 
+    plt.show() """
+
+def plot(reward):
+    plt.style.use('ggplot')  # Or 'classic', 'default', etc.
+    plt.plot(reward, linewidth=0.3)
+    plt.title('Q Learning Total Reward')
+    plt.xlabel('Trial')
+    plt.ylabel('Reward')
+    plt.show()
     
 def stateChecking(alien_agent, key_agent, action):
     directEnvironment = directNearbyEnvironment(key_agent)
